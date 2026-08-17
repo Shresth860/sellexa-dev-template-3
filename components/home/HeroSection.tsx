@@ -243,30 +243,30 @@ export default function HeroSection() {
                     href={`/search?category=${encodeURIComponent(
                       product.category,
                     )}`}
-className="
-  group
-  mt-9
-  flex
-  h-12
-  w-fit
-  lg:translate-x-[50%]
-  items-center
-  justify-center
-  gap-3
-  rounded-full
-  bg-black
-  px-8
-  text-[11px]
-  font-medium
-  uppercase
-  tracking-[0.08em]
-  text-white
-  transition-all
-  duration-300
-  hover:bg-black/85
-  hover:gap-4
-  active:scale-[0.98]
-"
+                    className="
+                      group
+                      mt-9
+                      flex
+                      h-12
+                      w-fit
+                      lg:translate-x-[50%]
+                      items-center
+                      justify-center
+                      gap-3
+                      rounded-full
+                      bg-black
+                      px-8
+                      text-[11px]
+                      font-medium
+                      uppercase
+                      tracking-[0.08em]
+                      text-white
+                      transition-all
+                      duration-300
+                      hover:bg-black/85
+                      hover:gap-4
+                      active:scale-[0.98]
+                    "
                   >
                     Start Shopping
                     <ArrowRight
