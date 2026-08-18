@@ -29,7 +29,7 @@ export default function HomeFooter() {
     <footer className="w-full bg-black text-white">
       <div className="mx-auto max-w-[1780px] px-4 sm:px-6 lg:px-8">
         {/* Main footer */}
-        <div className="grid gap-12 py-12 sm:py-16 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr] lg:gap-10 lg:py-20">
+        <div className="grid gap-8 py-10 sm:gap-10 sm:py-12 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr] lg:gap-10 lg:py-20">
           {/* Brand */}
           <div className="max-w-sm">
             <Link
@@ -39,13 +39,13 @@ export default function HomeFooter() {
               Sellexa
             </Link>
 
-            <p className="mt-5 text-sm leading-6 text-white/45">
+            <p className="mt-4 text-sm leading-6 text-white/45 sm:mt-5">
               Discover products worth having. A thoughtfully curated shopping
               experience built around quality, simplicity and choice.
             </p>
 
             {/* Social */}
-            <div className="mt-7 flex items-center gap-2">
+            <div className="mt-6 flex items-center gap-2 sm:mt-7">
               <a
                 href="#"
                 aria-label="Instagram"
@@ -73,12 +73,12 @@ export default function HomeFooter() {
           </div>
 
           {/* Shop */}
-          <div>
+          <div className="sm:pt-1">
             <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-white/45">
               Shop
             </h2>
 
-            <nav className="mt-5 flex flex-col gap-3">
+            <nav className="mt-4 flex flex-col gap-2.5 sm:mt-5 sm:gap-3">
               {footerLinks.shop.map((link) => (
                 <Link
                   key={link.label}
@@ -92,12 +92,12 @@ export default function HomeFooter() {
           </div>
 
           {/* Help */}
-          <div>
+          <div className="sm:pt-1">
             <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-white/45">
               Help
             </h2>
 
-            <nav className="mt-5 flex flex-col gap-3">
+            <nav className="mt-4 flex flex-col gap-2.5 sm:mt-5 sm:gap-3">
               {footerLinks.help.map((link) => (
                 <Link
                   key={link.label}
@@ -111,18 +111,18 @@ export default function HomeFooter() {
           </div>
 
           {/* Newsletter */}
-          <div>
+          <div className="sm:pt-1">
             <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-white/45">
               Stay in the loop
             </h2>
 
-            <p className="mt-5 text-sm leading-6 text-white/45">
+            <p className="mt-4 text-sm leading-6 text-white/45 sm:mt-5">
               Get updates about new products, collections and exclusive offers.
             </p>
 
             <form
               onSubmit={(event) => event.preventDefault()}
-              className="mt-5"
+              className="mt-4 sm:mt-5"
             >
               <div className="flex h-12 items-center overflow-hidden rounded-xl border border-white/10 bg-white/[0.05] transition focus-within:border-white/25">
                 <Mail
@@ -151,12 +151,12 @@ export default function HomeFooter() {
         </div>
 
         {/* Bottom */}
-        <div className="flex flex-col gap-4 border-t border-white/10 py-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-4 border-t border-white/10 py-5 sm:flex-row sm:items-center sm:justify-between sm:py-6">
           <p className="text-[10px] text-white/35 sm:text-xs">
             © {new Date().getFullYear()} Sellexa. All rights reserved.
           </p>
 
-          <div className="flex flex-wrap gap-x-5 gap-y-2">
+          <div className="flex flex-wrap gap-x-4 gap-y-2 sm:gap-x-5">
             <Link
               href="/privacy"
               className="text-[10px] text-white/35 transition hover:text-white/65 sm:text-xs"
