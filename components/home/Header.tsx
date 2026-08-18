@@ -10,6 +10,7 @@ import {
   X,
   ChevronDown,
 } from "lucide-react";
+import { useCart } from "@/context/CartContext";
 
 const navigation = [
   { label: "Home", href: "/" },
@@ -21,6 +22,7 @@ const navigation = [
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { totalItems } = useCart();
 
   useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
@@ -103,7 +105,7 @@ export default function Header() {
               <ShoppingBag size={19} strokeWidth={1.7} />
 
               <span className="absolute right-0.5 top-0.5 flex h-[15px] min-w-[15px] items-center justify-center rounded-full bg-black px-1 text-[9px] font-semibold leading-none text-white">
-                0
+                {totalItems}
               </span>
             </Link>
           </div>
@@ -117,7 +119,7 @@ export default function Header() {
             <ShoppingBag size={20} strokeWidth={1.8} />
 
             <span className="absolute right-0.5 top-0.5 flex h-[15px] min-w-[15px] items-center justify-center rounded-full bg-black px-1 text-[9px] font-semibold leading-none text-white">
-              0
+              {totalItems}
             </span>
           </Link>
         </div>
@@ -211,7 +213,7 @@ export default function Header() {
                   Cart
 
                   <span className="ml-auto text-xs text-black/50">
-                    0 items
+                    {totalItems} {totalItems === 1 ? "item" : "items"}
                   </span>
                 </Link>
               </div>
