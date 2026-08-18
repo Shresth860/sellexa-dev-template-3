@@ -10,29 +10,42 @@ import HomeFooter from "@/components/home/HomeFooter";
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-white text-black">
+    <div className="min-h-screen overflow-x-hidden bg-white text-black">
       <Header />
 
       <main>
         <HeroSection />
 
-        <section id="categories" className="scroll-mt-24">
+        <section
+          id="categories"
+          className="scroll-mt-20 sm:scroll-mt-24"
+        >
           <CategorySection />
         </section>
 
-        <section id="featured-products" className="scroll-mt-24">
+        <section
+          id="featured-products"
+          className="scroll-mt-20 sm:scroll-mt-24"
+        >
           <FeaturedProducts />
         </section>
 
-        <section id="best-sellers" className="scroll-mt-24">
+        <section
+          id="best-sellers"
+          className="scroll-mt-20 sm:scroll-mt-24"
+        >
           <BestSellingProducts />
         </section>
 
-        <section id="new-arrivals" className="scroll-mt-24">
+        <section
+          id="new-arrivals"
+          className="scroll-mt-20 sm:scroll-mt-24"
+        >
           <NewArrivals />
         </section>
 
         <PromoSection />
+
         <CustomerRating />
       </main>
 
