@@ -216,8 +216,8 @@ export default function ProductCard({
         </div>
 
         {/* Price */}
-        <div className="mt-1.5 flex flex-wrap items-center justify-between gap-x-1.5 gap-y-0.5">
-          <div className="flex flex-wrap items-center gap-x-1.5">
+        <div className="mt-1.5 flex items-end justify-between gap-2">
+          <div className="flex min-w-0 flex-wrap items-center gap-x-1.5 gap-y-0.5">
             <span className="text-[13px] font-semibold text-black sm:text-sm">
               ₹{product.price.toLocaleString("en-IN")}
             </span>
@@ -238,13 +238,13 @@ export default function ProductCard({
             )}
           </div>
 
-          {/* Buy Now Button - Visible on all screens */}
+          {/* Buy Now Button - aligned right of price */}
           {product.inStock && (
             <button
               type="button"
               onClick={handleBuyNow}
               aria-label={`Buy ${product.name}`}
-              className="flex h-6 items-center justify-center gap-1 rounded-full bg-black px-2.5 text-[9px] font-semibold text-white transition hover:bg-black/85 active:scale-95 sm:h-7 sm:px-3 sm:text-[10px]"
+              className="inline-flex h-6 shrink-0 items-center justify-center gap-1 rounded-full bg-black px-2.5 text-[9px] font-semibold text-white transition hover:bg-black/85 active:scale-95 sm:h-7 sm:px-3 sm:text-[10px]"
             >
               <ShoppingBag size={11} strokeWidth={1.8} />
               <span>Buy</span>
