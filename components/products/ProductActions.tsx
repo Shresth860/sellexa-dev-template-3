@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Minus, Plus } from "lucide-react";
+import { Heart, Minus, Plus, ShoppingBag } from "lucide-react";
 import Swal from "sweetalert2";
 import type { Product } from "@/data/products";
 import { useCart } from "@/context/CartContext";
@@ -17,14 +17,17 @@ export default function ProductActions({
   selectedColor,
   selectedStorage,
 }: ProductActionsProps) {
-  const { addItem } = useCart();
+  const { items, addItem } = useCart();
   const [quantity, setQuantity] = useState(1);
-  const [pincode, setPincode] = useState("");
-  const [pincodeStatus, setPincodeStatus] = useState<
-    "idle" | "valid" | "invalid"
-  >("idle");
+  const [wishlisted, setWishlisted] = useState(false);
 
   const maxQuantity = Math.min(product.stock, 10) || 1;
+
+  const cartId = [product.id, selectedColor, selectedStorage]
+    .filter(Boolean)
+    .join("-");
+  const cartQuantity =
+    items.find((item) => item.id === cartId)?.quantity ?? 0;
 
   const handleAddToCart = () => {
     addItem(
@@ -51,12 +54,8 @@ export default function ProductActions({
     });
   };
 
-  const handleCheckPincode = () => {
-    setPincodeStatus(/^\d{6}$/.test(pincode) ? "valid" : "invalid");
-  };
-
   return (
-    <div className="space-y-5">
+    <div className="space-y-3">
       <div className="flex items-center gap-3">
         <div className="flex h-11 items-center rounded-lg border border-black/15">
           <button
@@ -90,57 +89,31 @@ export default function ProductActions({
           type="button"
           onClick={handleAddToCart}
           disabled={!product.inStock}
-          className="flex h-11 flex-1 items-center justify-center rounded-lg bg-black text-[13px] font-semibold text-white transition hover:bg-black/85 disabled:cursor-not-allowed disabled:bg-black/25"
+          className="flex h-11 flex-1 items-center justify-center gap-2 rounded-lg bg-black text-[13px] font-semibold text-white transition hover:bg-black/85 disabled:cursor-not-allowed disabled:bg-black/25"
         >
-          {product.inStock ? "Add to Cart" : "Out of Stock"}
-        </button>
-
-        <button
-          type="button"
-          onClick={handleAddToCart}
-          disabled={!product.inStock}
-          className="flex h-11 items-center justify-center rounded-lg border border-black bg-white px-6 text-[13px] font-semibold text-black transition hover:bg-black/[0.04] disabled:cursor-not-allowed disabled:opacity-30"
-        >
-          Buy Now
+          <ShoppingBag size={15} strokeWidth={1.8} />
+          {!product.inStock
+            ? "Out of Stock"
+            : cartQuantity > 0
+              ? `ADDED (${cartQuantity})`
+              : "Add to Cart"}
         </button>
       </div>
 
-      <div>
-        <div className="flex gap-2">
-          <input
-            type="text"
-            inputMode="numeric"
-            maxLength={6}
-            value={pincode}
-            onChange={(event) => {
-              setPincode(event.target.value.replace(/\D/g, ""));
-              setPincodeStatus("idle");
-            }}
-            placeholder="Enter pincode"
-            className="h-11 flex-1 rounded-lg border border-black/15 px-4 text-sm placeholder:text-black/35 focus:border-black/40 focus:outline-none"
-          />
-
-          <button
-            type="button"
-            onClick={handleCheckPincode}
-            className="h-11 shrink-0 rounded-lg border border-black/15 px-5 text-[13px] font-medium text-black transition hover:border-black/35"
-          >
-            Check
-          </button>
-        </div>
-
-        {pincodeStatus === "valid" && (
-          <p className="mt-2 text-xs text-green-700">
-            Delivery available — arrives in 3-5 days.
-          </p>
-        )}
-
-        {pincodeStatus === "invalid" && (
-          <p className="mt-2 text-xs text-red-600">
-            Enter a valid 6-digit pincode.
-          </p>
-        )}
-      </div>
+      <button
+        type="button"
+        onClick={() => setWishlisted((value) => !value)}
+        aria-pressed={wishlisted}
+        className="flex items-center gap-1.5 text-[12px] font-medium text-black/50 transition hover:text-black"
+      >
+        <Heart
+          size={13}
+          strokeWidth={1.8}
+          fill={wishlisted ? "currentColor" : "none"}
+          className={wishlisted ? "text-black" : ""}
+        />
+        Wishlist
+      </button>
     </div>
   );
 }

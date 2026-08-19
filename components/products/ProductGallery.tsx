@@ -23,37 +23,9 @@ export default function ProductGallery({
   const activeImage = images[selectedIndex] ?? images[0];
 
   return (
-    <div className="flex flex-col-reverse gap-3 sm:flex-row sm:gap-4">
-      {/* Thumbnails */}
-      {images.length > 1 && (
-        <div className="flex gap-2 overflow-x-auto sm:w-20 sm:shrink-0 sm:flex-col sm:overflow-visible">
-          {images.map((image, index) => (
-            <button
-              key={image + index}
-              type="button"
-              onClick={() => setSelectedIndex(index)}
-              aria-label={`View ${name} image ${index + 1}`}
-              aria-pressed={index === selectedIndex}
-              className={`relative aspect-square w-16 shrink-0 overflow-hidden rounded-xl border bg-[#f5f5f3] transition sm:w-full ${
-                index === selectedIndex
-                  ? "border-black"
-                  : "border-black/10 hover:border-black/25"
-              }`}
-            >
-              <Image
-                src={image}
-                alt={`${name} thumbnail ${index + 1}`}
-                fill
-                sizes="80px"
-                className="object-cover"
-              />
-            </button>
-          ))}
-        </div>
-      )}
-
+    <div className="flex flex-col gap-3 sm:gap-4">
       {/* Main image */}
-      <div className="relative aspect-square flex-1 overflow-hidden rounded-2xl bg-[#f5f5f3] sm:aspect-4/5">
+      <div className="relative aspect-square overflow-hidden rounded-2xl bg-[#f5f5f3] sm:aspect-4/5">
         <ProductBadge
           badge={badge}
           className="absolute left-3 top-3 z-10"
@@ -91,6 +63,34 @@ export default function ProductGallery({
           </div>
         )}
       </div>
+
+      {/* Thumbnails */}
+      {images.length > 1 && (
+        <div className="flex gap-2 overflow-x-auto">
+          {images.map((image, index) => (
+            <button
+              key={image + index}
+              type="button"
+              onClick={() => setSelectedIndex(index)}
+              aria-label={`View ${name} image ${index + 1}`}
+              aria-pressed={index === selectedIndex}
+              className={`relative aspect-square w-16 shrink-0 overflow-hidden rounded-xl border bg-[#f5f5f3] transition ${
+                index === selectedIndex
+                  ? "border-black"
+                  : "border-black/10 hover:border-black/25"
+              }`}
+            >
+              <Image
+                src={image}
+                alt={`${name} thumbnail ${index + 1}`}
+                fill
+                sizes="80px"
+                className="object-cover"
+              />
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

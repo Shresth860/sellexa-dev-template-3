@@ -14,10 +14,10 @@ export default function ProductBadge({
   }
 
   const badgeStyles: Record<string, string> = {
-    "Best Seller": "bg-black text-white",
-    "New Arrival": "bg-white text-black border border-black/10",
-    Sale: "bg-black text-white",
-    Featured: "bg-white text-black border border-black/10",
+    "BEST SELLER": "bg-black text-white",
+    NEW: "bg-white text-black border border-black/10",
+    SALE: "bg-black text-white",
+    TRENDING: "bg-white text-black border border-black/10",
   };
 
   const style =
