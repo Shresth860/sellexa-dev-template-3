@@ -3,13 +3,14 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Star } from "lucide-react";
-import type { Product } from "@/data/products";
+import { getRelatedProducts, type Product } from "@/data/products";
 import ProductGallery from "@/components/products/ProductGallery";
 import VariantSelector from "@/components/products/VariantSelector";
 import ProductActions from "@/components/products/ProductActions";
 import DeliveryInfo from "@/components/products/DeliveryInfo";
 import ProductSpecifications from "@/components/products/ProductSpecifications";
 import ProductReviews from "@/components/products/ProductReviews";
+import RelatedProducts from "@/components/products/RelatedProducts";
 
 type ProductDetailsProps = {
   product: Product;
@@ -24,6 +25,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
   );
 
   const emiPerMonth = Math.round(product.price / 20);
+  const relatedProducts = getRelatedProducts(product.category, product.slug, 4);
 
   return (
     <div className="mx-auto max-w-[1780px] px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
@@ -39,7 +41,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
           href={`/search?category=${encodeURIComponent(product.category)}`}
           className="transition hover:text-black"
         >
-          {product.category}
+          Shop
         </Link>
         <span>/</span>
         <span className="text-black/70">{product.name}</span>
@@ -53,17 +55,21 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
         />
 
         <div>
-          <p className="mb-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-black/40">
-            {product.category}
-          </p>
+          <div className="mb-1.5 flex items-center gap-2">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-black/40">
+              {product.category}
+            </p>
+
+            {product.discount && (
+              <span className="rounded-full bg-black px-2 py-0.5 text-[10px] font-semibold text-white">
+                {product.discount}% OFF
+              </span>
+            )}
+          </div>
 
           <h1 className="text-2xl font-semibold tracking-[-0.03em] text-black sm:text-[28px]">
             {product.name}
           </h1>
-
-          <p className="mt-2 max-w-md text-[13px] leading-5 text-black/55">
-            {product.description}
-          </p>
 
           <div className="mt-3 flex items-center gap-2">
             <span className="flex items-center gap-1 rounded-md bg-black px-2 py-1 text-[11px] font-semibold text-white">
@@ -71,15 +77,11 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
               {product.rating.toFixed(1)}
             </span>
 
-            <span className="text-[12px] text-black/50">
-              ({product.reviewCount} ratings)
-            </span>
-
             <a
               href="#reviews"
               className="text-[12px] font-medium text-black/60 underline-offset-2 hover:underline"
             >
-              See all reviews
+              {product.reviewCount} reviews
             </a>
           </div>
 
@@ -93,17 +95,15 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
                 ₹{product.originalPrice.toLocaleString("en-IN")}
               </span>
             )}
-
-            {product.discount && (
-              <span className="text-sm font-semibold text-green-700">
-                {product.discount}% OFF
-              </span>
-            )}
           </div>
 
           <p className="mt-1 text-[11.5px] text-black/45">
             Inclusive of all taxes · EMI from ₹
             {emiPerMonth.toLocaleString("en-IN")}/mo available
+          </p>
+
+          <p className="mt-3 max-w-md text-[13px] leading-5 text-black/55">
+            {product.description}
           </p>
 
           {(product.colors?.length || product.storage?.length) && (
@@ -131,18 +131,41 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
             <DeliveryInfo />
           </div>
 
-          <div className="mt-6 space-y-6">
-            <ProductSpecifications specifications={product.specifications} />
+          {product.highlights && product.highlights.length > 0 && (
+            <div className="mt-6">
+              <p className="text-[13px] font-semibold text-black">
+                Why shoppers like it
+              </p>
+              <ul className="mt-2 space-y-1.5">
+                {product.highlights.map((highlight) => (
+                  <li
+                    key={highlight}
+                    className="flex items-start gap-2 text-[13px] text-black/65"
+                  >
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-black" />
+                    {highlight}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
-            <ProductReviews
-              rating={product.rating}
-              reviewCount={product.reviewCount}
-              ratingBreakdown={product.ratingBreakdown}
-              reviews={product.reviews}
-            />
+          <div className="mt-6">
+            <ProductSpecifications specifications={product.specifications} />
           </div>
         </div>
       </div>
+
+      <section className="mt-12 sm:mt-16">
+        <ProductReviews
+          rating={product.rating}
+          reviewCount={product.reviewCount}
+          reviews={product.reviews}
+          ratingBreakdown={product.ratingBreakdown}
+        />
+      </section>
+
+      <RelatedProducts products={relatedProducts} />
     </div>
   );
 }

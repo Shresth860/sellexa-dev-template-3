@@ -16,11 +16,11 @@ export async function generateMetadata({
   const product = getProductBySlug(slug);
 
   if (!product) {
-    return { title: "Product not found | Sellexa" };
+    return { title: "Sellexa" };
   }
 
   return {
-    title: `${product.name} | Sellexa`,
+    title: "Sellexa",
     description: product.description,
   };
 }

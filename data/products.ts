@@ -5,6 +5,7 @@ export type Product = {
   brand: string;
   category: string;
   description: string;
+  highlights?: string[];
 
   price: number;
   originalPrice?: number;
@@ -30,6 +31,7 @@ export type Product = {
     rating: number;
     date: string;
     comment: string;
+    tag?: string;
   }[];
 
   badge?: "NEW" | "BEST SELLER" | "SALE" | "TRENDING";
@@ -50,6 +52,11 @@ export const products: Product[] = [
     category: "Electronics",
     description:
       "Premium smartphone with a powerful processor, stunning display and advanced camera system.",
+    highlights: [
+      "All-day battery with 45W fast charging",
+      "Flagship camera system tuned for low light",
+      "Titanium build with IP68 water resistance",
+    ],
 
     price: 79999,
     originalPrice: 94999,
@@ -66,6 +73,9 @@ export const products: Product[] = [
     images: [
       "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=800&q=80",
       "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&q=80",
+      "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=800&q=80",
+      "https://images.unsplash.com/photo-1580910051074-3eb694886505?w=800&q=80",
+      "https://images.unsplash.com/photo-1616410011236-7a42121dd981?w=800&q=80",
     ],
 
     colors: [
@@ -76,6 +86,10 @@ export const products: Product[] = [
     storage: ["128GB", "256GB", "512GB"],
 
     specifications: [
+      { label: "Material", value: "Titanium frame, Gorilla Glass Victus" },
+      { label: "Color", value: "Jet Black, Deep Navy, Rose Gold" },
+      { label: "Warranty", value: "1-year manufacturer warranty" },
+      { label: "Delivery", value: "Dispatch within 24 hours across India" },
       { label: "Display", value: '6.7" Super Retina, 120Hz' },
       { label: "Processor", value: "Octa-core, 3.2GHz" },
       { label: "Rear Camera", value: "50MP + 12MP + 12MP" },
@@ -102,6 +116,7 @@ export const products: Product[] = [
         date: "2026-07-02",
         comment:
           "Camera quality is outstanding and the battery easily lasts a full day.",
+        tag: "VERIFIED PURCHASE",
       },
       {
         id: "r2",
@@ -110,6 +125,7 @@ export const products: Product[] = [
         date: "2026-06-18",
         comment:
           "Super smooth performance, no lag even with heavy multitasking.",
+        tag: "REPEAT BUYER",
       },
       {
         id: "r3",
@@ -118,6 +134,7 @@ export const products: Product[] = [
         date: "2026-06-05",
         comment:
           "Great phone overall, wish the charger was included in the box.",
+        tag: "TOP REVIEWER",
       },
     ],
 
@@ -996,4 +1013,27 @@ export const getProductsByCategory = (category: string) => {
   return products.filter(
     (product) => product.category === category
   );
+};
+
+export const getRelatedProducts = (
+  category: string,
+  excludeSlug: string,
+  limit: number = 4
+) => {
+  const sameCategory = products.filter(
+    (product) => product.category === category && product.slug !== excludeSlug
+  );
+
+  if (sameCategory.length >= limit) {
+    return sameCategory.slice(0, limit);
+  }
+
+  const fallback = products.filter(
+    (product) =>
+      product.featured &&
+      product.slug !== excludeSlug &&
+      !sameCategory.some((match) => match.slug === product.slug)
+  );
+
+  return [...sameCategory, ...fallback].slice(0, limit);
 };

@@ -4,36 +4,56 @@ import type { Product } from "@/data/products";
 type ProductReviewsProps = {
   rating: number;
   reviewCount: number;
-  ratingBreakdown?: Product["ratingBreakdown"];
   reviews?: Product["reviews"];
+  ratingBreakdown?: Product["ratingBreakdown"];
 };
 
 export default function ProductReviews({
   rating,
   reviewCount,
-  ratingBreakdown,
   reviews,
+  ratingBreakdown,
 }: ProductReviewsProps) {
   return (
     <section
       id="reviews"
       className="scroll-mt-24 rounded-2xl border border-black/[0.07] p-5 sm:p-6"
     >
-      <h2 className="text-lg font-semibold tracking-[-0.02em] text-black sm:text-xl">
-        Customer Reviews
-      </h2>
+      <div className="flex flex-wrap items-start justify-between gap-4">
+        <div className="max-w-lg">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-black/40">
+            Customer Reviews
+          </p>
+          <h2 className="mt-1 text-2xl font-semibold tracking-[-0.03em] text-black">
+            Our Reviews
+          </h2>
+          <p className="mt-2 text-[13px] leading-5 text-black/55">
+            Real feedback from verified shoppers who bought this product. See
+            what customers think before you buy.
+          </p>
+        </div>
 
-      <div className="mt-5 flex flex-col gap-8 sm:flex-row sm:gap-12">
-        {/* Summary */}
-        <div className="flex shrink-0 flex-col items-start gap-2 sm:w-48">
-          <div className="flex items-baseline gap-1.5">
-            <span className="text-4xl font-semibold text-black">
+        <a
+          href="#reviews"
+          className="inline-flex items-center rounded-full bg-black px-4 py-2 text-[12px] font-semibold text-white transition hover:bg-black/85"
+        >
+          Leave Us Feedback
+        </a>
+      </div>
+
+      <div className="mt-6 grid gap-8 border-t border-black/[0.07] pt-6 lg:grid-cols-2">
+        <div>
+          <div className="flex items-baseline gap-1">
+            <span className="text-[34px] font-semibold leading-none tracking-[-0.03em] text-black">
               {rating.toFixed(1)}
             </span>
-            <span className="text-sm text-black/40">/ 5</span>
+            <span className="text-[11px] leading-none text-black/45">
+              Out of
+              <br />5 Stars
+            </span>
           </div>
 
-          <div className="flex items-center gap-0.5">
+          <div className="mt-2 flex items-center gap-0.5">
             {Array.from({ length: 5 }).map((_, index) => (
               <Star
                 key={index}
@@ -47,77 +67,95 @@ export default function ProductReviews({
             ))}
           </div>
 
-          <p className="text-xs text-black/45">
-            Based on {reviewCount.toLocaleString("en-IN")} ratings
+          <p className="mt-2 text-[11.5px] text-black/45">
+            Overall rating of {reviewCount.toLocaleString("en-IN")} reviews
           </p>
 
           {ratingBreakdown && ratingBreakdown.length > 0 && (
-            <div className="mt-2 w-full space-y-1.5">
-              {ratingBreakdown.map((row) => (
-                <div
-                  key={row.stars}
-                  className="flex items-center gap-2 text-[11px] text-black/50"
-                >
-                  <span className="w-2.5">{row.stars}</span>
+            <div className="mt-5 space-y-1.5">
+              {ratingBreakdown.map((item) => {
+                const count = Math.round(
+                  (item.percentage / 100) * reviewCount
+                );
 
-                  <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-black/[0.07]">
-                    <div
-                      className="h-full rounded-full bg-black"
-                      style={{ width: `${row.percentage}%` }}
-                    />
+                return (
+                  <div key={item.stars} className="flex items-center gap-2">
+                    <span className="w-11 shrink-0 text-[11px] text-black/55">
+                      {item.stars} Star{item.stars !== 1 ? "s" : ""}
+                    </span>
+
+                    <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-black/[0.06]">
+                      <div
+                        className="h-full rounded-full bg-black"
+                        style={{ width: `${item.percentage}%` }}
+                      />
+                    </div>
+
+                    <span className="w-6 shrink-0 text-right text-[11px] text-black/45">
+                      {count}
+                    </span>
                   </div>
-
-                  <span className="w-7 text-right">{row.percentage}%</span>
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
         </div>
 
-        {/* Review list */}
-        <div className="flex-1 space-y-5">
-          {reviews && reviews.length > 0 ? (
-            reviews.map((review) => (
+        {reviews && reviews.length > 0 ? (
+          <div className="space-y-3 lg:border-l lg:border-black/[0.07] lg:pl-8">
+            {reviews.map((review) => (
               <div
                 key={review.id}
-                className="border-b border-black/[0.06] pb-5 last:border-0 last:pb-0"
+                className="rounded-xl border border-black/[0.07] p-4"
               >
-                <div className="flex items-center gap-0.5">
-                  {Array.from({ length: 5 }).map((_, index) => (
-                    <Star
-                      key={index}
-                      size={12}
-                      strokeWidth={0}
-                      fill="currentColor"
-                      className={
-                        index < review.rating
-                          ? "text-black"
-                          : "text-black/15"
-                      }
-                    />
-                  ))}
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-0.5">
+                    {Array.from({ length: 5 }).map((_, index) => (
+                      <Star
+                        key={index}
+                        size={12}
+                        strokeWidth={0}
+                        fill="currentColor"
+                        className={
+                          index < review.rating
+                            ? "text-black"
+                            : "text-black/15"
+                        }
+                      />
+                    ))}
+                  </div>
+
+                  {review.tag && (
+                    <span className="rounded-full bg-black/[0.05] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-[0.06em] text-black/50">
+                      {review.tag}
+                    </span>
+                  )}
                 </div>
 
-                <p className="mt-2 text-[13px] leading-5 text-black/75">
+                <div className="mt-3 flex items-center justify-between gap-2">
+                  <p className="text-[13px] font-semibold text-black">
+                    {review.author}
+                  </p>
+                  <p className="text-[11px] text-black/40">
+                    {new Date(review.date).toLocaleDateString("en-IN", {
+                      day: "numeric",
+                      month: "short",
+                      year: "numeric",
+                    })}
+                  </p>
+                </div>
+
+                <p className="mt-2 text-[13px] leading-5 text-black/70">
                   {review.comment}
                 </p>
-
-                <p className="mt-2 text-[11px] text-black/40">
-                  {review.author} ·{" "}
-                  {new Date(review.date).toLocaleDateString("en-IN", {
-                    day: "numeric",
-                    month: "short",
-                    year: "numeric",
-                  })}
-                </p>
               </div>
-            ))
-          ) : (
-            <p className="text-[13px] text-black/45">
-              No written reviews yet for this product.
-            </p>
-          )}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <p className="text-[13px] text-black/45 lg:border-l lg:border-black/[0.07] lg:pl-8">
+            No written reviews yet for this product.
+          </p>
+        )}
       </div>
     </section>
   );
