@@ -32,7 +32,7 @@ export default function CategorySection() {
         {/* Header */}
         <div className="mb-5 flex items-end justify-between gap-4 sm:mb-6">
           <div>
-            <p className="mb-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-black/35 sm:text-[11px]">
+            <p className="mb-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-black/35 sm:text-[12px]">
               Explore
             </p>
 
@@ -43,7 +43,7 @@ export default function CategorySection() {
 
           <Link
             href="/search"
-            className="group hidden items-center gap-1.5 text-xs font-medium text-black/50 transition hover:text-black sm:flex"
+            className="group hidden items-center gap-1.5 text-sm font-medium text-black/50 transition hover:text-black sm:flex"
           >
             View all
 
@@ -84,7 +84,7 @@ export default function CategorySection() {
                     {category}
                   </h3>
 
-                  <div className="mt-1.5 flex items-center gap-1 text-[10px] font-medium text-black/35 transition-colors group-hover:text-black/65 sm:text-[11px]">
+                  <div className="mt-1.5 flex items-center gap-1 text-[11px] font-medium text-black/35 transition-colors group-hover:text-black/65 sm:text-[12px]">
                     Explore
 
                     <ArrowRight
@@ -102,7 +102,7 @@ export default function CategorySection() {
         {/* Mobile view all */}
         <Link
           href="/search"
-          className="group mt-4 flex min-h-9 items-center justify-center gap-1.5 rounded-lg border border-black/[0.08] text-[11px] font-medium text-black/60 transition hover:border-black/15 hover:text-black sm:hidden"
+          className="group mt-4 flex min-h-9 items-center justify-center gap-1.5 rounded-lg border border-black/[0.08] text-[12px] font-medium text-black/60 transition hover:border-black/15 hover:text-black sm:hidden"
         >
           View all categories
 

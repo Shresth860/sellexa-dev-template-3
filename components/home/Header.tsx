@@ -15,9 +15,8 @@ import { useCart } from "@/context/CartContext";
 
 const navigation = [
   { label: "Home", href: "/" },
-  { label: "Shop", href: "/#featured-products" },
   { label: "Categories", href: "/#categories" },
-  { label: "Best Sellers", href: "/#best-sellers" },
+
   { label: "New Arrivals", href: "/#new-arrivals" },
 ];
 
@@ -44,7 +43,7 @@ export default function Header({
 
   return (
     <>
-      <header className="sticky top-0 z-50 w-full border-b border-black/10 bg-white/95 backdrop-blur-md">
+      <header className="sticky lg:fixed top-0 z-50 w-full border-b border-black/10 bg-white/95 backdrop-blur-md">
         <div className="mx-auto flex h-16 max-w-[1780px] items-center justify-between px-4 sm:px-6 lg:h-[72px] lg:px-8">
           {/* Mobile Menu */}
           <button
@@ -74,17 +73,10 @@ export default function Header({
               <Link
                 key={item.label}
                 href={item.href}
-                className="group flex items-center gap-1.5 text-[13px] font-medium text-black/75 transition hover:text-black"
+                className="group flex items-center gap-1.5 text-[18px] font-medium text-black/75 transition hover:text-black"
               >
                 {item.label}
 
-                {item.label === "Categories" && (
-                  <ChevronDown
-                    size={14}
-                    strokeWidth={1.7}
-                    className="transition-transform group-hover:rotate-180"
-                  />
-                )}
               </Link>
             ))}
           </nav>

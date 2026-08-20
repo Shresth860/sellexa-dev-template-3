@@ -21,7 +21,7 @@ export default function NewArrivals() {
                 className="text-black/45"
               />
 
-              <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-black/40 sm:text-[10px]">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-black/40 sm:text-[11px]">
                 Just arrived
               </p>
             </div>
@@ -30,14 +30,14 @@ export default function NewArrivals() {
               New arrivals
             </h2>
 
-            <p className="mt-1.5 max-w-md text-[11px] leading-5 text-black/45 sm:text-xs">
+            <p className="mt-1.5 max-w-md text-xs leading-5 text-black/45 sm:text-sm">
               Fresh products added to the Sellexa collection.
             </p>
           </div>
 
           <Link
             href="/search?sort=newest"
-            className="group hidden items-center gap-1.5 text-[11px] font-medium text-black/50 transition hover:text-black sm:flex"
+            className="group hidden items-center gap-1.5 text-sm font-medium text-black/50 transition hover:text-black sm:flex"
           >
             View all
 
@@ -57,7 +57,7 @@ export default function NewArrivals() {
           />
         ) : (
           <div className="flex min-h-32 items-center justify-center rounded-xl border border-black/[0.07] bg-[#f7f7f5] sm:rounded-2xl">
-            <p className="text-xs text-black/45">
+            <p className="text-sm text-black/45">
               No new arrivals available.
             </p>
           </div>
@@ -66,7 +66,7 @@ export default function NewArrivals() {
         {/* Mobile view all */}
         <Link
           href="/search?sort=newest"
-          className="group mt-6 flex min-h-9 items-center justify-center gap-1.5 rounded-lg border border-black/10 text-[10px] font-medium text-black transition hover:border-black/20 sm:hidden"
+          className="group mt-6 flex min-h-9 items-center justify-center gap-1.5 rounded-lg border border-black/10 text-[11px] font-medium text-black transition hover:border-black/20 sm:hidden"
         >
           View all new arrivals
 

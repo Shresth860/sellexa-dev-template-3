@@ -17,31 +17,19 @@ export default function ProductActions({
   selectedColor,
   selectedStorage,
 }: ProductActionsProps) {
-  const { items, addItem } = useCart();
+  const { cartItems, addToCart, toggleWishlist, isInWishlist } = useCart();
   const [quantity, setQuantity] = useState(1);
-  const [wishlisted, setWishlisted] = useState(false);
 
   const maxQuantity = Math.min(product.stock, 10) || 1;
 
   const cartId = [product.id, selectedColor, selectedStorage]
     .filter(Boolean)
     .join("-");
-  const cartQuantity =
-    items.find((item) => item.id === cartId)?.quantity ?? 0;
+  const cartQuantity = cartItems[cartId] ?? 0;
+  const wishlisted = isInWishlist(cartId);
 
   const handleAddToCart = () => {
-    addItem(
-      {
-        productId: product.id,
-        slug: product.slug,
-        name: product.name,
-        image: product.image,
-        price: product.price,
-        color: selectedColor,
-        storage: selectedStorage,
-      },
-      quantity
-    );
+    addToCart(cartId, quantity);
 
     Swal.fire({
       toast: true,
@@ -102,7 +90,7 @@ export default function ProductActions({
 
       <button
         type="button"
-        onClick={() => setWishlisted((value) => !value)}
+        onClick={() => toggleWishlist(cartId)}
         aria-pressed={wishlisted}
         className="flex items-center gap-1.5 text-[12px] font-medium text-black/50 transition hover:text-black"
       >

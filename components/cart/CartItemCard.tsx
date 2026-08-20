@@ -92,12 +92,12 @@ export default function CartItemCard({
         {/* Product Info - Mobile */}
         <div className="min-w-0 flex-1 sm:hidden">
           {product.category && (
-            <p className="truncate text-[9px] font-semibold uppercase tracking-wide text-zinc-400">
+            <p className="truncate text-[10px] font-semibold uppercase tracking-wide text-zinc-400">
               {product.category}
             </p>
           )}
 
-          <h3 className="mt-0.5 line-clamp-2 text-[12px] font-bold leading-snug text-zinc-900">
+          <h3 className="mt-0.5 line-clamp-2 text-[14px] font-bold leading-snug text-zinc-900">
             {product.name}
           </h3>
 
@@ -127,16 +127,16 @@ export default function CartItemCard({
         {/* Product Info - Desktop */}
         <div className="hidden min-w-0 flex-1 sm:block">
           {product.category && (
-            <p className="text-[10px] font-semibold uppercase tracking-wide text-zinc-400">
+            <p className="text-[11px] font-semibold uppercase tracking-wide text-zinc-400">
               {product.category}
             </p>
           )}
 
-          <h3 className="mt-0.5 line-clamp-2 text-[14px] font-bold leading-snug text-zinc-900">
+          <h3 className="mt-0.5 line-clamp-2 text-[15px] font-bold leading-snug text-zinc-900">
             {product.name}
           </h3>
 
-          <p className="mt-2 text-[13px] font-semibold text-zinc-700">
+          <p className="mt-2 text-[14px] font-semibold text-zinc-700">
             ₹{product.price.toLocaleString("en-IN")} × {quantity}
           </p>
         </div>

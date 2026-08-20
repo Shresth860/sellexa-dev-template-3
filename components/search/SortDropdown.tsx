@@ -104,7 +104,7 @@ export default function SortDropdown() {
         onClick={() => setOpen((current) => !current)}
         aria-haspopup="listbox"
         aria-expanded={open}
-        className="flex h-10 w-full items-center justify-between gap-4 rounded-xl border border-black/[0.08] bg-white px-3.5 text-xs font-medium text-black transition hover:border-black/15 active:scale-[0.99] sm:min-w-[190px] sm:gap-6"
+        className="flex h-10 w-full items-center justify-between gap-4 rounded-xl border border-black/[0.08] bg-white px-3.5 text-sm font-medium text-black transition hover:border-black/15 active:scale-[0.99] sm:min-w-[190px] sm:gap-6"
       >
         <span className="text-black/45">
           Sort by
@@ -141,7 +141,7 @@ export default function SortDropdown() {
                 role="option"
                 aria-selected={selected}
                 onClick={() => handleSortChange(option.value)}
-                className={`flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left text-xs transition ${
+                className={`flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left text-sm transition ${
                   selected
                     ? "bg-black text-white"
                     : "text-black/65 hover:bg-black/[0.04] hover:text-black"

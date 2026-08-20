@@ -59,7 +59,7 @@ export default function HeroSection() {
   ];
 
   return (
-    <section className="mt-5 w-full bg-white">
+    <section className="mt-15 w-full bg-white">
       <div className="mx-auto w-full max-w-full px-3 pt-0  ">
 
         {/* =====================================================
@@ -329,9 +329,9 @@ export default function HeroSection() {
                     }
                   `}
                 >
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center">
+                  <div className="flex h-15 w-15 shrink-0 items-center justify-center">
                     <Icon
-                      size={21}
+                      size={45}
                       strokeWidth={1.45}
                       className="text-black/70"
                     />
@@ -340,7 +340,7 @@ export default function HeroSection() {
                   <div className="min-w-0 text-left">
                     <p
                       className="
-                        text-[10px]
+                        lg:text-[14px]
                         font-semibold
                         uppercase
                         tracking-[0.02em]
@@ -354,7 +354,7 @@ export default function HeroSection() {
                     <p
                       className="
                         mt-0.5
-                        text-[9px]
+                        text-[12px]
                         leading-4
                         text-black/40
                         sm:text-[10px]
