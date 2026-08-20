@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Heart, Minus, Plus, ShoppingBag } from "lucide-react";
 import Swal from "sweetalert2";
 import type { Product } from "@/data/products";
@@ -17,31 +18,17 @@ export default function ProductActions({
   selectedColor,
   selectedStorage,
 }: ProductActionsProps) {
-  const { items, addItem } = useCart();
+  const router = useRouter();
+  const { cartItems, addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [wishlisted, setWishlisted] = useState(false);
 
   const maxQuantity = Math.min(product.stock, 10) || 1;
 
-  const cartId = [product.id, selectedColor, selectedStorage]
-    .filter(Boolean)
-    .join("-");
-  const cartQuantity =
-    items.find((item) => item.id === cartId)?.quantity ?? 0;
+  const cartQuantity = cartItems[product.id] ?? 0;
 
   const handleAddToCart = () => {
-    addItem(
-      {
-        productId: product.id,
-        slug: product.slug,
-        name: product.name,
-        image: product.image,
-        price: product.price,
-        color: selectedColor,
-        storage: selectedStorage,
-      },
-      quantity
-    );
+    addToCart(product.id, quantity);
 
     Swal.fire({
       toast: true,
@@ -52,6 +39,24 @@ export default function ProductActions({
       timer: 1600,
       timerProgressBar: true,
     });
+  };
+
+  const handleBuyNow = () => {
+    addToCart(product.id, quantity);
+
+    const checkoutPayload = [
+      {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        quantity,
+        image: product.image,
+        category: product.category,
+      },
+    ];
+
+    localStorage.setItem("sellexa-checkout", JSON.stringify(checkoutPayload));
+    router.push("/checkout");
   };
 
   return (
@@ -97,6 +102,15 @@ export default function ProductActions({
             : cartQuantity > 0
               ? `ADDED (${cartQuantity})`
               : "Add to Cart"}
+        </button>
+
+        <button
+          type="button"
+          onClick={handleBuyNow}
+          disabled={!product.inStock}
+          className="flex h-11 flex-1 items-center justify-center gap-2 rounded-lg border border-black text-[13px] font-semibold text-black transition hover:bg-black hover:text-white disabled:cursor-not-allowed disabled:border-black/25 disabled:text-black/25 disabled:hover:bg-transparent disabled:hover:text-black/25"
+        >
+          Buy Now
         </button>
       </div>
 

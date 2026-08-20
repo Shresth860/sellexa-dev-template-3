@@ -25,7 +25,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
   );
 
   const emiPerMonth = Math.round(product.price / 20);
-  const relatedProducts = getRelatedProducts(product.category, product.slug, 4);
+  const relatedProducts = getRelatedProducts(product.category, product.slug, 6);
 
   return (
     <div className="mx-auto max-w-[1780px] px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
@@ -47,7 +47,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
         <span className="text-black/70">{product.name}</span>
       </nav>
 
-      <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
+      <div className="grid gap-8 lg:grid-cols-[2fr_3fr] lg:gap-12">
         <ProductGallery
           images={product.images.length ? product.images : [product.image]}
           name={product.name}
@@ -71,7 +71,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
             {product.name}
           </h1>
 
-          <div className="mt-3 flex items-center gap-2">
+          <div className="mt-2 flex items-center gap-2">
             <span className="flex items-center gap-1 rounded-md bg-black px-2 py-1 text-[11px] font-semibold text-white">
               <Star size={11} fill="currentColor" strokeWidth={0} />
               {product.rating.toFixed(1)}
@@ -85,7 +85,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
             </a>
           </div>
 
-          <div className="mt-4 flex flex-wrap items-baseline gap-x-2 gap-y-1">
+          <div className="mt-3 flex flex-wrap items-baseline gap-x-2 gap-y-1">
             <span className="text-[26px] font-semibold text-black">
               ₹{product.price.toLocaleString("en-IN")}
             </span>
@@ -102,12 +102,12 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
             {emiPerMonth.toLocaleString("en-IN")}/mo available
           </p>
 
-          <p className="mt-3 max-w-md text-[13px] leading-5 text-black/55">
+          <p className="mt-1.5 max-w-md text-[13px] leading-5 text-black/55">
             {product.description}
           </p>
 
           {(product.colors?.length || product.storage?.length) && (
-            <div className="mt-6 border-t border-black/[0.07] pt-6">
+            <div className="mt-3 border-t border-black/[0.07] pt-3">
               <VariantSelector
                 colors={product.colors}
                 storageOptions={product.storage}
@@ -119,7 +119,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
             </div>
           )}
 
-          <div className="mt-6 border-t border-black/[0.07] pt-6">
+          <div className="mt-3 border-t border-black/[0.07] pt-3">
             <ProductActions
               product={product}
               selectedColor={selectedColor}
@@ -127,30 +127,11 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
             />
           </div>
 
-          <div className="mt-6">
+          <div className="mt-3">
             <DeliveryInfo />
           </div>
 
-          {product.highlights && product.highlights.length > 0 && (
-            <div className="mt-6">
-              <p className="text-[13px] font-semibold text-black">
-                Why shoppers like it
-              </p>
-              <ul className="mt-2 space-y-1.5">
-                {product.highlights.map((highlight) => (
-                  <li
-                    key={highlight}
-                    className="flex items-start gap-2 text-[13px] text-black/65"
-                  >
-                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-black" />
-                    {highlight}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          <div className="mt-6">
+          <div className="mt-3">
             <ProductSpecifications specifications={product.specifications} />
           </div>
         </div>
