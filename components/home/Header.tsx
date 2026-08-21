@@ -4,7 +4,7 @@ import Link from "next/link";
 import {
   Search,
   ShoppingBag,
-  UserRound,
+  Settings,
   Heart,
 } from "lucide-react";
 import { useCart } from "@/context/CartContext";
@@ -52,13 +52,13 @@ export default function Header({
             <Search size={19} strokeWidth={1.7} />
           </Link>
 
-          {/* Account */}
+          {/* Settings */}
           <Link
-            href="/account"
-            aria-label="Account"
+            href="/settings"
+            aria-label="Settings"
             className="flex h-10 w-10 items-center justify-center rounded-full transition hover:bg-black/5"
           >
-            <UserRound size={19} strokeWidth={1.7} />
+            <Settings size={19} strokeWidth={1.7} />
           </Link>
 
           {/* Wishlist */}
