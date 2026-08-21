@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Heart, Minus, Plus, ShoppingBag } from "lucide-react";
+import { Heart, ShoppingBag } from "lucide-react";
 import Swal from "sweetalert2";
 import type { Product } from "@/data/products";
 import { useCart } from "@/context/CartContext";
@@ -21,57 +20,27 @@ export default function ProductActions({
   const router = useRouter();
 
   const {
-    items = [],
-    addItem,
+    addToCart,
+    getCartQuantity,
     toggleWishlist,
     isInWishlist,
   } = useCart();
 
-  const [quantity, setQuantity] = useState(1);
-
-  const maxQuantity = Math.max(
-    1,
-    Math.min(product.stock ?? 0, 10)
-  );
-
-  // Unique cart ID for product + selected variants
+  // Unique wishlist ID for product + selected variants
   const cartId = [product.id, selectedColor, selectedStorage]
     .filter(Boolean)
     .join("-");
 
-  const cartQuantity =
-    items.find((item) => item.id === cartId)?.quantity ?? 0;
+  const cartQuantity = getCartQuantity(product.id);
 
   const wishlisted = isInWishlist(cartId);
-
-  const handleDecrease = () => {
-    setQuantity((value) => Math.max(1, value - 1));
-  };
-
-  const handleIncrease = () => {
-    setQuantity((value) =>
-      Math.min(maxQuantity, value + 1)
-    );
-  };
 
   const handleAddToCart = () => {
     if (!product.inStock) {
       return;
     }
 
-    addItem(
-      {
-        id: cartId,
-        productId: product.id,
-        slug: product.slug,
-        name: product.name,
-        image: product.image,
-        price: product.price,
-        color: selectedColor,
-        storage: selectedStorage,
-      },
-      quantity
-    );
+    addToCart(product.id, 1);
 
     Swal.fire({
       toast: true,
@@ -89,19 +58,11 @@ export default function ProductActions({
       return;
     }
 
-    addItem(
-      {
-        id: cartId,
-        productId: product.id,
-        slug: product.slug,
-        name: product.name,
-        image: product.image,
-        price: product.price,
-        color: selectedColor,
-        storage: selectedStorage,
-      },
-      quantity
-    );
+    const buyQuantity = cartQuantity > 0 ? cartQuantity : 1;
+
+    if (cartQuantity === 0) {
+      addToCart(product.id, 1);
+    }
 
     const checkoutPayload = [
       {
@@ -109,7 +70,7 @@ export default function ProductActions({
         productId: product.id,
         name: product.name,
         price: product.price,
-        quantity,
+        quantity: buyQuantity,
         image: product.image,
         category: product.category,
         color: selectedColor,
@@ -127,38 +88,8 @@ export default function ProductActions({
 
   return (
     <div className="space-y-3">
-      {/* Quantity + Add to Cart */}
+      {/* Add to Cart + Buy Now */}
       <div className="flex items-center gap-3">
-        {/* Quantity */}
-        <div className="flex h-11 items-center rounded-lg border border-black/15">
-          {/* Decrease */}
-          <button
-            type="button"
-            onClick={handleDecrease}
-            disabled={quantity <= 1}
-            aria-label="Decrease quantity"
-            className="flex h-full w-10 items-center justify-center text-black/60 transition hover:text-black disabled:cursor-not-allowed disabled:opacity-30"
-          >
-            <Minus size={15} strokeWidth={1.8} />
-          </button>
-
-          {/* Quantity */}
-          <span className="w-8 text-center text-sm font-medium">
-            {quantity}
-          </span>
-
-          {/* Increase */}
-          <button
-            type="button"
-            onClick={handleIncrease}
-            disabled={quantity >= maxQuantity}
-            aria-label="Increase quantity"
-            className="flex h-full w-10 items-center justify-center text-black/60 transition hover:text-black disabled:cursor-not-allowed disabled:opacity-30"
-          >
-            <Plus size={15} strokeWidth={1.8} />
-          </button>
-        </div>
-
         {/* Add to Cart */}
         <button
           type="button"
