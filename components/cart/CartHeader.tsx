@@ -41,7 +41,7 @@ export default function CartHeader({
               className="shrink-0 text-zinc-900 sm:hidden"
             />
 
-            <h1 className="text-[30px] font-black leading-none tracking-[-0.055em] text-zinc-950 sm:text-[38px] lg:text-[44px]">
+            <h1 className="text-[24px] font-black leading-none tracking-[-0.055em] text-zinc-950 sm:text-[38px] lg:text-[24px]">
               My Cart
             </h1>
 

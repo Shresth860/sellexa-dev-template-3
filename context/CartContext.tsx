@@ -96,18 +96,25 @@ export function CartProvider({
   }, [wishlistItems, mounted]);
 
   // Add product to cart
-  const addToCart = (
-    productId: string,
-    quantity = 1
-  ) => {
-    if (quantity <= 0) return;
+const addToCart = (
+  productId: string,
+  quantity = 1
+) => {
+  setCartItems((previous) => {
+    const currentQuantity = previous[productId] ?? 0;
+    const newQuantity = currentQuantity + quantity;
 
-    setCartItems((previous) => ({
-      ...previous,
-      [productId]:
-        (previous[productId] ?? 0) + quantity,
-    }));
-  };
+    const next = { ...previous };
+
+    if (newQuantity <= 0) {
+      delete next[productId];
+    } else {
+      next[productId] = newQuantity;
+    }
+
+    return next;
+  });
+};
 
   // Update cart quantity
   const updateCartQuantity = (
