@@ -137,7 +137,7 @@ export default function ProductCard({
                 type="button"
                 onClick={handleAddToCart}
                 aria-label={`Add ${product.name} to cart`}
-                className="flex h-8 w-full items-center justify-center gap-1.5 rounded-lg bg-black text-[10px] font-medium text-white opacity-0 shadow-lg transition group-hover:opacity-100 hover:bg-black/85 active:scale-[0.98]"
+                className="flex h-8 w-full items-center justify-center gap-1.5 rounded-lg bg-black text-[11px] font-medium text-white opacity-0 shadow-lg transition group-hover:opacity-100 hover:bg-black/85 active:scale-[0.98]"
               >
                 <ShoppingBag
                   size={13}
@@ -186,12 +186,12 @@ export default function ProductCard({
 
       {/* Product Information */}
       <div className="px-0.5 pt-2.5 sm:pt-3">
-        <p className="mb-1 text-[8px] font-medium uppercase tracking-wider text-black/40 sm:text-[9px]">
+        <p className="mb-1 text-[9px] font-medium uppercase tracking-wider text-black/40 sm:text-[10px]">
           {product.category}
         </p>
 
         <Link href={`/products/${product.slug}`}>
-          <h3 className="line-clamp-2 min-h-[2.25rem] text-[12px] font-medium leading-[1.35rem] text-black transition hover:text-black/55 sm:text-[13px] sm:leading-[1.4rem]">
+          <h3 className="line-clamp-2 min-h-[2.25rem] text-[14px] font-medium leading-[1.35rem] text-black transition hover:text-black/55 sm:text-[15px] sm:leading-[1.4rem]">
             {product.name}
           </h3>
         </Link>
@@ -205,12 +205,12 @@ export default function ProductCard({
               strokeWidth={0}
             />
 
-            <span className="text-[10px] font-medium">
+            <span className="text-[11px] font-medium">
               {product.rating.toFixed(1)}
             </span>
           </div>
 
-          <span className="text-[9px] text-black/35">
+          <span className="text-[10px] text-black/35">
             ({product.reviewCount})
           </span>
         </div>
@@ -218,12 +218,12 @@ export default function ProductCard({
         {/* Price */}
         <div className="mt-1.5 flex items-end justify-between gap-2">
           <div className="flex min-w-0 flex-wrap items-center gap-x-1.5 gap-y-0.5">
-            <span className="text-[13px] font-semibold text-black sm:text-sm">
+            <span className="text-base font-semibold text-black sm:text-lg">
               ₹{product.price.toLocaleString("en-IN")}
             </span>
 
             {product.originalPrice && (
-              <span className="text-[9px] text-black/35 line-through sm:text-[10px]">
+              <span className="text-[10px] text-black/35 line-through sm:text-[11px]">
                 ₹
                 {product.originalPrice.toLocaleString(
                   "en-IN"
@@ -232,7 +232,7 @@ export default function ProductCard({
             )}
 
             {product.discount && (
-              <span className="text-[8px] font-semibold text-black/50 sm:text-[9px]">
+              <span className="text-[9px] font-semibold text-black/50 sm:text-[10px]">
                 {product.discount}% OFF
               </span>
             )}
@@ -244,7 +244,7 @@ export default function ProductCard({
               type="button"
               onClick={handleBuyNow}
               aria-label={`Buy ${product.name}`}
-              className="inline-flex h-6 shrink-0 items-center justify-center gap-1 rounded-full bg-black px-2.5 text-[9px] font-semibold text-white transition hover:bg-black/85 active:scale-95 sm:h-7 sm:px-3 sm:text-[10px]"
+              className="inline-flex h-6 shrink-0 items-center justify-center gap-1 rounded-full bg-black px-2.5 text-[10px] font-semibold text-white transition hover:bg-black/85 active:scale-95 sm:h-7 sm:px-3 sm:text-[11px]"
             >
               <ShoppingBag size={11} strokeWidth={1.8} />
               <span>Buy</span>
@@ -260,7 +260,7 @@ export default function ProductCard({
                 type="button"
                 onClick={handleAddToCart}
                 aria-label={`Add ${product.name} to cart`}
-                className="flex h-8 w-full items-center justify-center gap-1.5 rounded-lg bg-black text-[10px] font-medium text-white transition active:scale-[0.98]"
+                className="flex h-8 w-full items-center justify-center gap-1.5 rounded-lg bg-black text-[11px] font-medium text-white transition active:scale-[0.98]"
               >
                 <ShoppingBag
                   size={12}

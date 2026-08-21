@@ -20,10 +20,14 @@ export default function ProductActions({
 }: ProductActionsProps) {
   const router = useRouter();
 
-  const { items = [], addItem } = useCart();
+  const {
+    items = [],
+    addItem,
+    toggleWishlist,
+    isInWishlist,
+  } = useCart();
 
   const [quantity, setQuantity] = useState(1);
-  const [wishlisted, setWishlisted] = useState(false);
 
   const maxQuantity = Math.max(
     1,
@@ -37,6 +41,8 @@ export default function ProductActions({
 
   const cartQuantity =
     items.find((item) => item.id === cartId)?.quantity ?? 0;
+
+  const wishlisted = isInWishlist(cartId);
 
   const handleDecrease = () => {
     setQuantity((value) => Math.max(1, value - 1));
@@ -133,10 +139,7 @@ export default function ProductActions({
             aria-label="Decrease quantity"
             className="flex h-full w-10 items-center justify-center text-black/60 transition hover:text-black disabled:cursor-not-allowed disabled:opacity-30"
           >
-            <Minus
-              size={15}
-              strokeWidth={1.8}
-            />
+            <Minus size={15} strokeWidth={1.8} />
           </button>
 
           {/* Quantity */}
@@ -152,10 +155,7 @@ export default function ProductActions({
             aria-label="Increase quantity"
             className="flex h-full w-10 items-center justify-center text-black/60 transition hover:text-black disabled:cursor-not-allowed disabled:opacity-30"
           >
-            <Plus
-              size={15}
-              strokeWidth={1.8}
-            />
+            <Plus size={15} strokeWidth={1.8} />
           </button>
         </div>
 
@@ -166,10 +166,7 @@ export default function ProductActions({
           disabled={!product.inStock}
           className="flex h-11 flex-1 items-center justify-center gap-2 rounded-lg bg-black text-[13px] font-semibold text-white transition hover:bg-black/85 disabled:cursor-not-allowed disabled:bg-black/25"
         >
-          <ShoppingBag
-            size={15}
-            strokeWidth={1.8}
-          />
+          <ShoppingBag size={15} strokeWidth={1.8} />
 
           {!product.inStock
             ? "Out of Stock"
@@ -192,23 +189,15 @@ export default function ProductActions({
       {/* Wishlist */}
       <button
         type="button"
-        onClick={() =>
-          setWishlisted((value) => !value)
-        }
+        onClick={() => toggleWishlist(cartId)}
         aria-pressed={wishlisted}
         className="flex items-center gap-1.5 text-[12px] font-medium text-black/50 transition hover:text-black"
       >
         <Heart
           size={13}
           strokeWidth={1.8}
-          fill={
-            wishlisted
-              ? "currentColor"
-              : "none"
-          }
-          className={
-            wishlisted ? "text-black" : ""
-          }
+          fill={wishlisted ? "currentColor" : "none"}
+          className={wishlisted ? "text-black" : ""}
         />
 
         Wishlist

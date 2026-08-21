@@ -14,7 +14,7 @@ export default function FeaturedProducts() {
         {/* Header */}
         <div className="mb-5 flex items-end justify-between gap-4 sm:mb-6">
           <div>
-            <p className="mb-1.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-black/40 sm:text-[10px]">
+            <p className="mb-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-black/40 sm:text-[11px]">
               Curated for you
             </p>
 
@@ -22,14 +22,14 @@ export default function FeaturedProducts() {
               Featured products
             </h2>
 
-            <p className="mt-1.5 max-w-md text-[11px] leading-5 text-black/45 sm:text-xs">
+            <p className="mt-1.5 max-w-md text-xs leading-5 text-black/45 sm:text-sm">
               Discover some of our most carefully selected products.
             </p>
           </div>
 
           <Link
             href="/search?featured=true"
-            className="group hidden items-center gap-1.5 text-[11px] font-medium text-black/50 transition hover:text-black sm:flex"
+            className="group hidden items-center gap-1.5 text-sm font-medium text-black/50 transition hover:text-black sm:flex"
           >
             View all
 
@@ -49,7 +49,7 @@ export default function FeaturedProducts() {
           />
         ) : (
           <div className="flex min-h-32 items-center justify-center rounded-xl border border-black/[0.07] bg-[#f7f7f5] sm:rounded-2xl">
-            <p className="text-xs text-black/45">
+            <p className="text-sm text-black/45">
               No featured products available.
             </p>
           </div>
@@ -58,7 +58,7 @@ export default function FeaturedProducts() {
         {/* Mobile view all */}
         <Link
           href="/search?featured=true"
-          className="group mt-6 flex min-h-9 items-center justify-center gap-1.5 rounded-lg border border-black/10 text-[10px] font-medium text-black transition hover:border-black/20 sm:hidden"
+          className="group mt-6 flex min-h-9 items-center justify-center gap-1.5 rounded-lg border border-black/10 text-[11px] font-medium text-black transition hover:border-black/20 sm:hidden"
         >
           View all featured products
 

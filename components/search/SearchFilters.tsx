@@ -211,7 +211,7 @@ useEffect(() => {
                   )}
                 </span>
 
-                <span className="text-xs text-black/65">
+                <span className="text-sm text-black/65">
                   {category}
                 </span>
               </button>
@@ -257,7 +257,7 @@ useEffect(() => {
                   )}
                 </span>
 
-                <span className="text-xs text-black/65">
+                <span className="text-sm text-black/65">
                   {brand}
                 </span>
               </button>
@@ -301,7 +301,7 @@ useEffect(() => {
                 )}
               </span>
 
-              <span className="text-xs text-black/65">
+              <span className="text-sm text-black/65">
                 {range.label}
               </span>
             </button>
@@ -345,7 +345,7 @@ useEffect(() => {
                 )}
               </span>
 
-              <span className="text-xs text-black/65">
+              <span className="text-sm text-black/65">
                 {rating.label}
               </span>
             </button>
@@ -413,7 +413,7 @@ useEffect(() => {
                 <button
                   type="button"
                   onClick={clearFilters}
-                  className="text-[10px] font-medium text-black/45 transition hover:text-black"
+                  className="text-[11px] font-medium text-black/45 transition hover:text-black"
                 >
                   Clear all
                 </button>
@@ -433,7 +433,7 @@ useEffect(() => {
         <button
           type="button"
           onClick={() => setMobileOpen(true)}
-          className="flex h-10 w-full items-center justify-center gap-2 rounded-xl border border-black/[0.08] bg-white text-xs font-medium text-black transition active:scale-[0.98]"
+          className="flex h-10 w-full items-center justify-center gap-2 rounded-xl border border-black/[0.08] bg-white text-sm font-medium text-black transition active:scale-[0.98]"
         >
           <SlidersHorizontal
             size={15}
@@ -443,7 +443,7 @@ useEffect(() => {
           Filters
 
           {hasFilters && (
-            <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-black px-1.5 text-[9px] text-white">
+            <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-black px-1.5 text-[10px] text-white">
               {
                 [
                   selectedCategory,
@@ -501,7 +501,7 @@ useEffect(() => {
                 <button
                   type="button"
                   onClick={clearFilters}
-                  className="h-10 flex-1 rounded-xl border border-black/10 text-xs font-medium"
+                  className="h-10 flex-1 rounded-xl border border-black/10 text-sm font-medium"
                 >
                   Clear all
                 </button>
@@ -510,7 +510,7 @@ useEffect(() => {
               <button
                 type="button"
                 onClick={() => setMobileOpen(false)}
-                className="h-10 flex-1 rounded-xl bg-black text-xs font-medium text-white"
+                className="h-10 flex-1 rounded-xl bg-black text-sm font-medium text-white"
               >
                 Apply filters
               </button>
