@@ -1,5 +1,5 @@
 import type { Product } from "@/data/products";
-import RelatedProductCard from "@/components/products/RelatedProductCard";
+import ProductCard from "@/components/products/ProductCard";
 
 type RelatedProductsProps = {
   products: Product[];
@@ -19,9 +19,9 @@ export default function RelatedProducts({ products }: RelatedProductsProps) {
         More picks for you
       </h2>
 
-      <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-5">
+      <div className="mt-6 grid grid-cols-2 items-start gap-x-4 gap-y-8 sm:grid-cols-4 sm:gap-x-5 sm:gap-y-10 lg:grid-cols-6">
         {products.map((product) => (
-          <RelatedProductCard key={product.id} product={product} />
+          <ProductCard key={product.id} product={product} />
         ))}
       </div>
     </section>

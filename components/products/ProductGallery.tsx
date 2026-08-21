@@ -23,9 +23,9 @@ export default function ProductGallery({
   const activeImage = images[selectedIndex] ?? images[0];
 
   return (
-    <div className="flex flex-col gap-3 sm:gap-4">
+    <div className="flex flex-col gap-3 sm:gap-4 lg:h-full">
       {/* Main image */}
-      <div className="relative aspect-square overflow-hidden rounded-2xl bg-[#f5f5f3] sm:aspect-4/5">
+      <div className="relative aspect-square overflow-hidden rounded-2xl bg-[#f5f5f3] lg:aspect-auto lg:min-h-[420px] lg:flex-1">
         <ProductBadge
           badge={badge}
           className="absolute left-3 top-3 z-10"
@@ -66,7 +66,7 @@ export default function ProductGallery({
 
       {/* Thumbnails */}
       {images.length > 1 && (
-        <div className="flex gap-2 overflow-x-auto">
+        <div className="flex gap-2 overflow-x-auto lg:shrink-0">
           {images.map((image, index) => (
             <button
               key={image + index}
