@@ -8,6 +8,7 @@ import {
   Heart,
 } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import { useCartCount } from "@/context/CartCountContext";
 
 interface HeaderProps {
   hideCart?: boolean;
@@ -18,7 +19,13 @@ export default function Header({
   hideCart = false,
   hideWishlist = false,
 }: HeaderProps = {}) {
-  const { cartCount, wishlistCount } = useCart();
+  const { wishlistCount: rawWishlistCount } = useCart();
+  const { cartCount: rawCartCount } = useCartCount();
+
+  const wishlistCount =
+    typeof rawWishlistCount === "number" ? rawWishlistCount : 0;
+  const cartCount =
+    typeof rawCartCount === "number" ? rawCartCount : 0;
 
   return (
     <header className="sticky lg:fixed top-0 z-50 w-full border-b border-black/10 bg-white/95 backdrop-blur-md">
@@ -87,11 +94,9 @@ export default function Header({
             >
               <ShoppingBag size={19} strokeWidth={1.7} />
 
-              {cartCount > 0 && (
-                <span className="absolute right-0.5 top-0.5 flex h-[15px] min-w-[15px] items-center justify-center rounded-full bg-black px-1 text-[9px] font-semibold leading-none text-white">
-                  {cartCount > 99 ? "99+" : cartCount}
-                </span>
-              )}
+              <span className="absolute right-0.5 top-0.5 flex h-[15px] min-w-[15px] items-center justify-center rounded-full bg-black px-1 text-[9px] font-semibold leading-none text-white">
+                {cartCount > 99 ? "99+" : cartCount}
+              </span>
             </Link>
           )}
         </div>
@@ -105,11 +110,9 @@ export default function Header({
           >
             <ShoppingBag size={20} strokeWidth={1.8} />
 
-            {cartCount > 0 && (
-              <span className="absolute right-0.5 top-0.5 flex h-[15px] min-w-[15px] items-center justify-center rounded-full bg-black px-1 text-[9px] font-semibold leading-none text-white">
-                {cartCount > 99 ? "99+" : cartCount}
-              </span>
-            )}
+            <span className="absolute right-0.5 top-0.5 flex h-[15px] min-w-[15px] items-center justify-center rounded-full bg-black px-1 text-[9px] font-semibold leading-none text-white">
+              {cartCount > 99 ? "99+" : cartCount}
+            </span>
           </Link>
         )}
       </div>

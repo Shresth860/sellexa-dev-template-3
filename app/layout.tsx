@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { CartProvider } from "@/context/CartContext";
+import { CartCountProvider } from "@/context/CartCountContext";
 import "./globals.css";
 import BottomNav from "@/components/home/BottomNav";
 
@@ -26,7 +27,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <CartProvider>{children} <BottomNav/></CartProvider>
+        <CartProvider>
+          <CartCountProvider>
+            {children} <BottomNav />
+          </CartCountProvider>
+        </CartProvider>
         
       </body>
     </html>
