@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import { Heart, ShoppingBag } from "lucide-react";
-import Swal from "sweetalert2";
 import type { Product } from "@/data/products";
 import { useCart } from "@/context/CartContext";
 
@@ -41,16 +40,6 @@ export default function ProductActions({
     }
 
     addToCart(product.id, 1);
-
-    Swal.fire({
-      toast: true,
-      position: "top-end",
-      icon: "success",
-      title: "Added to cart",
-      showConfirmButton: false,
-      timer: 1600,
-      timerProgressBar: true,
-    });
   };
 
   const handleBuyNow = () => {

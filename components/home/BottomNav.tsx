@@ -45,6 +45,13 @@ export default function BottomNav({
       count: wishlistCount,
     },
     {
+      label: "Cart",
+      href: "/cart",
+      icon: ShoppingBag,
+      show: !hideCart,
+      count: cartCount,
+    },
+    {
     label: "Orders",
     href: "/orders",
     icon: Package,
